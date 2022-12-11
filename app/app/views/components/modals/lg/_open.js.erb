@@ -1,0 +1,10 @@
+let lgModal = $("#lg-modal-app")
+let lgModalContent = $("#lg-modal-body")
+let lgModalTitle = $("#lg-modal-title")
+let lgModalError = $("#lg-modal-error-explanation")
+
+
+lgModalTitle.html("<%= modal_options[:title].to_s %>")
+lgModalContent.html("<%= j render content, locals_variables   %>")
+lgModalError.html("")
+lgModal.modal()

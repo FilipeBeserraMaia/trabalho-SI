@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  web:
+    image: nginx
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    depends_on:
+      - app
+    ports:
+    - 80:80
+  app:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b 0.0.0.0"
+    volumes:
+      - ./app:/app
+    environment:
+      - RAILS_ENV=development
+    depends_on:
+      - db
+    ports:
+      - '3000:3000'
+  db:
+    image: postgres:14-bullseye
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - '5432:5432'
+#    volumes:
+#      - ./pgdata:/var/lib/postgresql/data/pgdata
+#      - ./postgres-data:/var/lib/postgresql/data
+      # copy the sql script to create tables
+#      - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql

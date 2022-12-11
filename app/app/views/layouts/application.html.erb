@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MunicipeApp</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= javascript_include_tag :jquery, :jquery_ujs, "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+  <script>
+      function populateAlerts(notice, alertt) {
+          document.getElementById("notice-app").innerHTML = ""
+          document.getElementById("alert-app").innerHTML = ""
+          if (notice)
+              document.getElementById("notice-app").innerHTML = `<p class="alert alert-info">${notice}</p>`
+          if (alertt)
+              document.getElementById("alert-app").innerHTML = `<p class="alert alert-danger">${alertt}</p>`
+      }
+  </script>
+</head>
+<body id="body">
+<div class="header" id="header">
+  <button onclick="toggleSidebar()" class="btn_icon_header">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+    </svg>
+  </button>
+  <div class="logo_header">
+    <i> <%= "#{Utility.translate_class_name(Municipe)}" %></i>
+  </div>
+  <div class="navigation_header" id="navigation_header">
+    <button onclick="toggleSidebar()" class="btn_icon_header">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+      </svg>
+    </button>
+
+
+    <% if user_signed_in? %>
+      <%=
+        link_to root_path do
+          "Home"
+        end
+      %>
+      <%=
+        link_to municipes_path do
+          "#{Utility.translate_class_name(Municipe).pluralize}"
+        end
+      %>
+      Logged in as <strong><%= current_user.email %></strong>.
+      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
+    <% else %>
+      <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> |
+      <%= link_to "Login", new_user_session_path, :class => 'navbar-link' %>
+    <% end %>
+
+  </div>
+</div>
+<div>
+  <p id="notice-app"><%= notice %></p>
+  <p id="alert-app"><%= alert %></p>
+</div>
+<div tabindex="0" class="content" onfocus="closeSidebar()" id="content">
+
+  <div id="root" class="container">
+    <div id="alert_app"></div>
+    <script>populateAlerts("<%=notice %>","<%=alert %>")</script>
+    <%= yield %>
+  </div>
+
+  <footer class="mt-auto  m-10">
+    <p> Copyright
+      <a target="_blank" href="https://github.com/FilipeBeserraMaia" class=""><%= Date.today.year %></a>, by
+      Filipe
+      B. M.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>
+<%= render 'components/modals/lg/large_modal' %>

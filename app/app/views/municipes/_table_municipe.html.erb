@@ -1,0 +1,33 @@
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th><%= Utility.translate_attr(Municipe, :id) %></th>
+    <th><%= Utility.translate_attr(Municipe, :nome) %></th>
+    <th><%= Utility.translate_attr(Municipe, :cpf) %></th>
+    <th><%= Utility.translate_attr(Municipe, :cns) %></th>
+    <th><%= Utility.translate_attr(Municipe, :email) %></th>
+    <th><%= Utility.translate_attr(Municipe, :dta_nasc) %></th>
+    <th><%= Utility.translate_attr(Municipe, :telefone) %></th>
+    <th><%= Utility.translate_attr(Municipe, :status) %></th>
+    <th><%= Utility.translate_attr(Municipe, :action) %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% municipes.each do |municipe| %>
+    <tr>
+      <td><%= municipe.id %></td>
+      <td><%= municipe.nome %></td>
+      <td><%= Utility.cpf_formatted(municipe.cpf) %></td>
+      <td><%= Utility.cns_formatted(municipe.cns) %></td>
+      <td><%= municipe.email %></td>
+      <td><%= Utility.date_formatted(municipe.dta_nasc) %></td>
+      <td><%= Utility.phone_br_formatted(municipe.telefone) %></td>
+      <td> <%= Utility.translate_enum_name(municipe.class.name, :statuses, municipe.status.to_sym) %></td>
+      <td>
+        <%= edit_btn(Municipe, edit_municipe_path(municipe), { remote: true }) %>
+        <%= show_btn(Municipe, municipe_path(municipe), { remote: true }) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

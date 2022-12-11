@@ -1,0 +1,6 @@
+<%= close_lg_modal(obj: @municipe) %>
+
+
+<% unless @municipe.errors.present? %>
+$("#municipes-table").html("<%= j  render 'municipes/table_municipe', municipes: @municipes %>")
+<%end %>

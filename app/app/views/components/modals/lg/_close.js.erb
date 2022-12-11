@@ -1,0 +1,12 @@
+let lgModal = $("#lg-modal-app")
+let lgModalContent = $("#lg-modal-body")
+let lgModalTitle = $("#lg-modal-title")
+let lgModalError = $("#lg-modal-error-explanation")
+
+<% if obj.errors.present? %>
+lgModalError.html('<%= j render 'components/alerts/error_explanation',obj:obj  %>');
+<%else %>
+lgModalTitle.html("")
+lgModalContent.html("")
+lgModal.modal('hide')
+<%end%>

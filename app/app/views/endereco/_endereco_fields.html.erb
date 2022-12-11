@@ -1,0 +1,34 @@
+<div>
+  <%= form.label :cep, style: "display: block" %>
+  <%= form.text_field :cep, id: :cep, onchange: 'getCepInfo(this.value)', class: 'form-control' %>
+</div>
+
+<div>
+  <%= form.label :uf, style: "display: block" %>
+  <%= form.select :uf, options_for_select_estados(form&.object), {}, { id: :uf, onchange: "getCidadeInfo(this.value)", class: 'form-control' } %>
+</div>
+
+<div>
+  <%= form.label :cidade, style: "display: block" %>
+  <%= form.select :cidade, options_for_select_municipios(form&.object), {}, { id: :cidade , class: 'form-control'} %>
+</div>
+
+<div>
+  <%= form.label :longr, style: "display: block" %>
+  <%= form.text_field :longr, id: :longr, class: 'form-control' %>
+</div>
+
+<div>
+  <%= form.label :complemento, style: "display: block" %>
+  <%= form.text_field :complemento, id: :complemento, class: 'form-control' %>
+</div>
+
+<div>
+  <%= form.label :bairro, style: "display: block" %>
+  <%= form.text_field :bairro, id: :bairro , class: 'form-control'%>
+</div>
+
+<div>
+  <%= form.label :cdg_ibge, style: "display: block" %>
+  <%= form.text_field :cdg_ibge, id: :cdg_ibge , class: 'form-control'%>
+</div>

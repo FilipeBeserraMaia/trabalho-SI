@@ -1,0 +1,21 @@
+pt:
+  activerecord:
+    attributes:
+      endereco:
+        id: Código Identificador
+        cep: CEP
+        longr: Longradouro
+        complemento: Complemento
+        bairro: Bairro
+        cidade: Cidade
+        uf: UF
+        cdg_ibge: Cógido IBGE
+        municipe_id: Munícipe
+        created_at: Criado Em
+        updated_at: Atualizado Em
+        action: Ação
+        actions:
+          new: Novo
+          edit: Editar
+          show: Vizualizar
+        class_name: Endereço

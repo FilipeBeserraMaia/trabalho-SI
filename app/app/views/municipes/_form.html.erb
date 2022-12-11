@@ -1,0 +1,119 @@
+<div>
+  <%= form_with(model: municipe, html: { multipart: true }, data: { remote: true }, id: 'form-municipe') do |form| %>
+
+    <div>
+      <% if form.object.persisted? and form.object.foto.present? %>
+        <div id='img-tag-div'>
+          <div>
+            <%= image_tag url_for(form.object.foto), height: "auto", width: "50px" %>
+          </div>
+          <%= link_to "X", delete_foto_attached_municipe_path(foto_id: form.object.foto.id), data: { confirm: Utility.translate_form(:confirm) }, remote: true %>
+        </div>
+      <% end %>
+      <div id='foto-input-div'>
+        <%= form.label :foto %>
+        <%= form.file_field :foto, multiple: false %>
+      </div>
+    </div>
+
+    <div>
+      <%= form.label :nome, style: "display: block " %>
+      <%= form.text_field :nome, class: 'form-control' %>
+    </div>
+
+    <div>
+      <%= form.label :cpf, style: "display: block " %>
+      <%= form.text_field :cpf, class: 'form-control' %>
+    </div>
+
+    <div>
+      <%= form.label :cns, style: "display: block " %>
+      <%= form.text_field :cns, class: 'form-control' %>
+    </div>
+
+    <div>
+      <%= form.label :email, style: "display: block " %>
+      <%= form.text_field :email, class: 'form-control' %>
+    </div>
+
+    <div>
+      <%= form.label :dta_nasc, style: "display: block " %>
+      <%= form.date_field :dta_nasc, class: 'form-control' %>
+    </div>
+
+    <div>
+      <%= form.label :telefone, style: "display: block " %>
+      <%= form.text_field :telefone, class: 'form-control' %>
+    </div>
+
+    <div>
+      <%= form.label :status, style: "display: block " %>
+      <%= form.select :status, options_for_enum(form.object, :statuses), {}, class: 'form-control' %>
+    </div>
+
+    <%= form.fields_for :endereco do |f| %>
+      <% render 'endereco/endereco_fields', form: f %>
+    <% end %>
+
+    <div class="p-3">
+      <%= form.submit Utility.translate_actions(Municipe, action_name.to_sym), class: 'btn-sm btn-primary' %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+    let setCepResponseData = function (data) {
+        $("#cep").val(data['cep'])
+        $("#uf").val(data['state'])
+        $("#cidade").val(data['city'])
+        getCidadeInfo(data['state'], {cidade: normalizeStr(data['city'])})
+        $("#bairro").val(data['neighborhood'])
+        $("#longr").val(data['street'])
+    }
+    let setEstadoResponseData = function (data, extra_data = null) {
+        let select = $('#cidade');
+        $(select).html("")
+        $(data).each(function (index) {
+            let name = capitalizeString(data[index]['nome'].toString())
+            $(select).append(`<option value='${name}'> ${name} </option>`);
+        });
+
+        if (extra_data != null) {
+            $(select).val(extra_data['cidade'])
+        }
+    }
+
+    function getCepInfo(cep, extraData = null) {
+        if (cep.length == 8) {
+            ajaxGet("<%= cep_path %>", {cep: cep.toString()}, setCepResponseData)
+        }
+    }
+
+
+    function getCidadeInfo(sigla_uf, extraData = null) {
+        if (sigla_uf.length == 2) {
+            ajaxGet("<%= municipios_path %>", {sigla_uf: sigla_uf.toString()}, setEstadoResponseData, null, extraData)
+        }
+    }
+
+
+    function ajaxGet(url, params = null, sucessAction = null, failureAction = null, extraData = null) {
+        $.getJSON(url, params, function (data) {
+            sucessAction(data, extraData);
+        }).done(function () {
+            // console.log("second success");
+        }).fail(function () {
+            // console.log("error");
+        }).always(function () {
+            // console.log("complete");
+        });
+    }
+
+    function capitalizeString(str) {
+        return str.toString().toLowerCase().trim().replace(/^\w/, (c) => c.toUpperCase());
+    }
+
+    function normalizeStr(str) {
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+    }
+</script>

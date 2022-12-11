@@ -1,0 +1,73 @@
+<div>
+  <h3><%= Utility.translate_class_name(Municipe) %></h3>
+  <div class="rounded-5">
+    <% if municipe.persisted? and municipe.foto.present? %>
+      <div>
+        <%= image_tag url_for(municipe.foto), height: "auto", width: "125px" %>
+      </div>
+    <% end %>
+  </div>
+
+  <ul class="list-group">
+    <li class="list-group-item">
+      <strong><%= Utility.translate_attr(municipe.class, :id) %> : </strong> <%= municipe.id %></li>
+    <li class="list-group-item">
+      <strong><%= Utility.translate_attr(municipe.class, :nome) %> : </strong> <%= municipe.nome %></li>
+    <li class="list-group-item"><strong><%= Utility.translate_attr(municipe.class, :cpf) %> : </strong>
+      <%= Utility.cpf_formatted(municipe.cpf) %>
+    </li>
+    <li class="list-group-item"><strong><%= Utility.translate_attr(municipe.class, :cns) %> : </strong>
+      <%= Utility.cns_formatted(municipe.cns) %>
+    </li>
+    <li class="list-group-item">
+      <strong><%= Utility.translate_attr(municipe.class, :email) %> : </strong> <%= municipe.email %></li>
+    <li class="list-group-item">
+      <strong><%= Utility.translate_attr(municipe.class, :dta_nasc) %>: </strong>
+      <%= Utility.date_formatted(municipe.dta_nasc) %>
+    </li>
+    <li class="list-group-item"><strong><%= Utility.translate_attr(municipe.class, :telefone) %> : </strong>
+      <%= Utility.phone_br_formatted(municipe.telefone) %>
+    </li>
+    <% if municipe.endereco.present? %>
+      <div>
+        <h3><%= Utility.translate_class_name(Endereco) %></h3>
+
+        <ul>
+          <li class="list-group-item"><strong><%= Utility.translate_attr(municipe.endereco.class, :id) %> : </strong>
+            <%= municipe.endereco.id %>
+          </li>
+          <li class="list-group-item"><strong><%= Utility.translate_attr(municipe.endereco.class, :cep) %> : </strong>
+            <%= Utility.cep_formatted(municipe.endereco.cep) %>
+          </li>
+          <li class="list-group-item"><strong><%= Utility.translate_attr(municipe.endereco.class, :longr) %> : </strong>
+            <%= municipe.endereco.longr %>
+          </li>
+          <li class="list-group-item">
+            <strong><%= Utility.translate_attr(municipe.endereco.class, :complemento) %> : </strong>
+            <%= municipe.endereco.complemento %>
+          </li>
+          <li class="list-group-item">
+            <strong><%= Utility.translate_attr(municipe.endereco.class, :bairro) %> : </strong>
+            <%= municipe.endereco.bairro %>
+          </li>
+          <li class="list-group-item">
+            <strong><%= Utility.translate_attr(municipe.endereco.class, :cidade) %> : </strong>
+            <%= municipe.endereco.cidade %>
+          </li>
+          <li class="list-group-item"><strong><%= Utility.translate_attr(municipe.endereco.class, :uf) %> : </strong>
+            <%= municipe.endereco.uf %>
+          </li>
+          <li class="list-group-item">
+            <strong><%= Utility.translate_attr(municipe.endereco.class, :cdg_ibge) %> : </strong>
+            <%= municipe.endereco.cdg_ibge %>
+          </li>
+          <li class="list-group-item">
+            <strong><%= Utility.translate_attr(municipe.endereco.class, :municipe_id) %> : </strong>
+            <%= municipe.endereco.municipe_id %>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+  </ul>
+
+</div>

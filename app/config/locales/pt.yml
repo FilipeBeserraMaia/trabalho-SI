@@ -1,0 +1,26 @@
+pt:
+  activerecord:
+    errors:
+      messages:
+        invalid_email: Email Inválido
+        invalid_cpf: CPF Inválido
+        invalid_cns: CNS Inválido
+        invalid_birthday: Data de nascimento inválida
+        blank: Não pode ficar em branco
+        too_short: Não contem a quantidade minima de caracteres
+        too_long: Contem  caracteres em excesso
+    form:
+      confirm: Tem certeza desta ação ?
+  app:
+    about: Um aplicativo simples para praticar o desenvolvimento de software de back-end
+    home_page: Home Page Municipe App
+
+  devise:
+    failure:
+      user:
+        unauthenticated: "Você não está autenticado, por favor entre com um usuário ou cadastre-se"
+        unconfirmed: "Usuário não está comfirmado"
+        invalid: "Usuário ou senha está incorreto"
+        signed_in: Bem Vindo
+        already_authenticated: Você já esta autenticado
+

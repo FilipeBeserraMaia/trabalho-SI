@@ -1,0 +1,19 @@
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+</head>
+<body>
+<h1>Olá ,<%= @municipe.nome %>, esté é um informativo de que houve mudanças em seus dados cadastrais no MunicipeApp</h1>
+<p>
+  Os dados alterados estão descritos a baixo :
+</p>
+<% @changes.each do |key, value| %>
+  <% if @default_exclude_attrs.exclude?(key.to_s.to_sym) %>
+    <p> O atributo: <%= key.to_s %>
+      Estava <strong><%= value.first %></strong>
+      foi atualizado para <strong><%= value.last %> </strong></p>
+  <% end %>
+<% end %>
+<p>qualquer dúvida estamos a disposição, tenha um ótimo dia!</p>
+</body>
+</html>

@@ -1,0 +1,22 @@
+pt:
+  activerecord:
+    attributes:
+      municipe:
+        collection_name: Listagem de Municipes
+        id: Código Identificador
+        nome: Nome
+        cpf: CPF
+        cns: CNS
+        email: Email
+        dta_nasc: Data de nascimento
+        telefone: Telefone
+        status: Status
+        statuses:
+          active: Ativo
+          inactive: Inativo
+        action: Ação
+        actions:
+          new: Novo
+          edit: Editar
+          show: Vizualizar
+        class_name: Municipe
