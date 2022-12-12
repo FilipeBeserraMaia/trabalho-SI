@@ -1,5 +1,6 @@
 FROM nginx
-RUN apt-get update -qq && apt-get -y install apache2-utils
+RUN apt-get update -qq && apt-get install apache2-utils -y
+RUN apt-get update -qq && apt-get  install zip -y
 ENV RAILS_ROOT /var/www/app
 WORKDIR $RAILS_ROOT
 RUN mkdir -p log

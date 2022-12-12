@@ -13,6 +13,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :enderecos do
+    collection do
+      get :search
+    end
+  end
+
 
   get :estados, controller: :brasil_api
   get :municipios, controller: :brasil_api

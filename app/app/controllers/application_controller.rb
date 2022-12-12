@@ -7,12 +7,11 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to '/', :alert => exception.message
   end
+
   def render_500(exception)
     @exception = exception
     ApplicationMailer.with(exception: exception).erro_500_mail.deliver_now! if ::MAILER_PASSWORD.present?
     render :template => "errors/500", :status => 500, layout: false
   end
-
-
 
 end

@@ -6,10 +6,19 @@ services:
     build:
       context: .
       dockerfile: ./nginx/Dockerfile
+    volumes:
+      - ./nginx/certificate.crt:/root/ssl/certificate.crt
+      - ./nginx/private.key:/root/ssl/private.key
     depends_on:
       - app
     ports:
-    - 80:80
+      - 80:80
+      - 443:443
+#  snort:
+#    image: snort
+#    build:
+#      context: .
+#      dockerfile: ./snort/Dockerfile
   app:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b 0.0.0.0"
@@ -34,8 +43,3 @@ services:
         max-file: "3"
     ports:
       - '5432:5432'
-#    volumes:
-#      - ./pgdata:/var/lib/postgresql/data/pgdata
-#      - ./postgres-data:/var/lib/postgresql/data
-      # copy the sql script to create tables
-#      - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql

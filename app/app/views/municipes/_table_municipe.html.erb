@@ -24,8 +24,9 @@
       <td><%= Utility.phone_br_formatted(municipe.telefone) %></td>
       <td> <%= Utility.translate_enum_name(municipe.class.name, :statuses, municipe.status.to_sym) %></td>
       <td>
-        <%= edit_btn(Municipe, edit_municipe_path(municipe), { remote: true }) %>
-        <%= show_btn(Municipe, municipe_path(municipe), { remote: true }) %>
+        <%= edit_btn(Municipe, edit_municipe_path(municipe), { remote: true }) if can?(:edit,Municipe) %>
+
+        <%= show_btn(Municipe, municipe_path(municipe), { remote: true })  if can?(:read,Municipe) %>
       </td>
     </tr>
   <% end %>

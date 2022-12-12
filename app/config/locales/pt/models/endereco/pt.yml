@@ -2,6 +2,7 @@ pt:
   activerecord:
     attributes:
       endereco:
+        collection_name: Listagem de Endereços
         id: Código Identificador
         cep: CEP
         longr: Longradouro

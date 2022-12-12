@@ -1,0 +1,31 @@
+<table class="table table-bordered">
+  <thead>
+  <tr>
+
+     <th><%= Utility.translate_attr(Endereco, :id) %></th>
+     <th><%= Utility.translate_attr(Endereco, :cep) %></th>
+     <th><%= Utility.translate_attr(Endereco, :longr) %></th>
+     <th><%= Utility.translate_attr(Endereco, :complemento) %></th>
+     <th><%= Utility.translate_attr(Endereco, :bairro) %></th>
+     <th><%= Utility.translate_attr(Endereco, :cidade) %></th>
+     <th><%= Utility.translate_attr(Endereco, :uf) %></th>
+     <th><%= Utility.translate_attr(Endereco, :cdg_ibge) %></th>
+     <th><%= Utility.translate_attr(Endereco, :municipe_id) %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% enderecos.each do |endereco| %>
+    <tr>
+      <td><%= Utility.translate_attr(Endereco, :id) %>: <%=endereco.id %></td>
+      <td><%= Utility.translate_attr(Endereco, :cep) %>: <%=endereco.cep %></td>
+      <td><%= Utility.translate_attr(Endereco, :longr) %>: <%=endereco.longr %></td>
+      <td><%= Utility.translate_attr(Endereco, :complemento) %>: <%=endereco.complemento %></td>
+      <td><%= Utility.translate_attr(Endereco, :bairro) %>: <%=endereco.bairro %></td>
+      <td><%= Utility.translate_attr(Endereco, :cidade) %>: <%=endereco.cidade %></td>
+      <td><%= Utility.translate_attr(Endereco, :uf) %>: <%=endereco.uf %></td>
+      <td><%= Utility.translate_attr(Endereco, :cdg_ibge) %>: <%=endereco.cdg_ibge %></td>
+      <td><%= Utility.translate_attr(Endereco, :municipe_id) %>: <%=endereco.municipe.nome %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

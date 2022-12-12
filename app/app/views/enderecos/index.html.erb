@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<h1><%= Utility.translate_attr(Endereco, :collection_name).to_s %></h1>
+
+<div class="">
+  <div class="">
+    <%= form_with(url: search_enderecos_path, method: :get, id: 'form-search-endereco', remote: true) do |f| %>
+      <%= f.text_field :term, class: 'form-control', id: 'search-endereco', placeholder: ". . ." %>
+    <% end %>
+  </div>
+
+  <div id="enderecos-table" class="table-responsive m-2">
+    <%= render 'table_endereco', enderecos: @enderecos %>
+  </div>
+
+</div>
+
+
+<script>
+
+    let searchField = $("#search-endereco")
+    searchField.on('change', function (e) {
+        $("#search-endereco").submit()
+    });
+</script>
+
